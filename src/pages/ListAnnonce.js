@@ -8,11 +8,7 @@ import './../assets/css/statTables.css';
 import './../assets/css/ListAnnonce.css';
 
 const ListAnnonce = () => {
-  const [showForm, setShowForm] = useState(false);
 
-  const toggleForm = () => {
-    setShowForm((prevShowForm) => !prevShowForm);
-  };
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const annoncesData = [
     {
