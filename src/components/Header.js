@@ -8,14 +8,9 @@ const Header = () => {
     <header className="container mt-12" class="header">
         <div className="mt-12">
         <ul class="nav justify-content-center">
+            
             <li class="nav-item">
-                <NavLink className="nav-link" to="/home">Tableau statistique</NavLink>
-            </li>
-            <li class="nav-item">
-                <NavLink className="nav-link" to="/list_annonce">Liste des annonces</NavLink>
-            </li>
-            <li class="nav-item">
-                <NavLink className="nav-link" to="/element_necessaire">Les elements necessaires</NavLink>
+                <NavLink className="nav-link" to="/home">Liste des annonces</NavLink>
             </li>
             <li class="nav-item">
                 <NavLink className="nav-link" to="/">Deconnection</NavLink>

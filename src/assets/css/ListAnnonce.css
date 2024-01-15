@@ -30,5 +30,8 @@
     color: white;
     border-color: white;
 }
-
-
+.recherche-annonce{
+    border: 2px solid beige;
+    padding: 10px;
+    margin: 5px;
+}

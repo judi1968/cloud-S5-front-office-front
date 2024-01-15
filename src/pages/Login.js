@@ -31,7 +31,7 @@ const Login = () => {
       <img src="%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0).png" alt="logo du VaikaNet" />
       <form className="login-form" onSubmit={handleLogin}>
         <label>
-          Nom d'admin: 
+          Nom d'utilisateur: 
           <input
             name='name'
             type="text"
