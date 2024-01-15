@@ -8,7 +8,18 @@ import './../assets/css/statTables.css';
 import './../assets/css/ListAnnonce.css';
 
 const ListAnnonce = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+  const handleToggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
+  const handleSearch = () => {
+    // Ajoutez ici la logique de recherche en fonction des champs du formulaire
+    console.log('Recherche effectuée');
+    // Vous pouvez réinitialiser les champs du formulaire ici si nécessaire
+    // setIsSearchOpen(false);
+  };
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const annoncesData = [
     {
@@ -74,59 +85,69 @@ const ListAnnonce = () => {
   
 
   return (
-    <div className="container mt-12 grid-container">
+    <div className="container mt-12">
       <header>
         <Header />
       </header>
+      
+      <main className="mt-12 grid-container container">
+      <div className='row'>   
+      <div className={`recherche-annonce recherche-div ${isSearchOpen ? 'open' : 'closed'}`}>
+      {isSearchOpen ? (
+        <div className="d-flex flex-wrap align-items-center">
+          <form className="row g-3 needs-validation" noValidate>
+                <div class="col-md-4">
+                  <label for="validationCustom00" class="form-label">Chercher un annonce</label>
+                  <input type="text" class="form-control" id="validationCustom00" placeholder='text,titre,nom de voiture ,...'/>
+                </div>
+                <div class="col-md-4">
+                  <label for="validationCustom01" class="form-label">Marque</label>
+                  <select class="form-select" id="validationCustom01">
+                    <option selected value="*">tout</option>
+                    <option value="1">Audi</option>
+                    <option value="2">Mercedes</option>
 
-      <main className="mt-12">
-        <div className="container mt-12 table-container">
-          <h1>Liste des annonces de vente de voitures</h1>
-          <div class="row recherche-annonce">
-          <div class="d-flex flex-wrap align-items-center">
-             <form class="row g-3 needs-validation" novalidate>
-              <div class="col-md-4">
-                <label for="validationCustom00" class="form-label">Chercher un annonce</label>
-                <input type="text" class="form-control" id="validationCustom00" placeholder='text,titre,nom de voiture ,...'/>
-              </div>
-              <div class="col-md-4">
-                <label for="validationCustom01" class="form-label">Marque</label>
-                <select class="form-select" id="validationCustom01">
-                  <option selected value="*">tout</option>
-                  <option value="1">Audi</option>
-                  <option value="2">Mercedes</option>
-
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label for="validationCustom02" class="form-label">Model</label>
-                <select class="form-select" id="validationCustom02" required>
-                  <option selected value="*">Tout</option>
-                  <option value="1">X5</option>
-                  <option value="2">X6</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <label for="validationCustom03" class="form-label">Date debut</label>
-                <input type="date" class="form-control" id="validationCustom03" />
-              </div>
-              <div class="col-md-3">
-              <label for="validationCustom04" class="form-label">Date fin</label>
-                <input type="date" class="form-control" id="validationCustom04" />
-              </div>
-              <div class="col-md-3">
-                <label for="validationCustom05" class="form-label">Valeur minimum</label>
-                <input type="number" class="form-control" id="validationCustom05" />
-              </div>
-              <div class="col-md-3">
-              <label for="validationCustom06" class="form-label">Valeur maximum</label>
-                <input type="number" class="form-control" id="validationCustom06" />
-              </div>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="validationCustom02" class="form-label">Model</label>
+                  <select class="form-select" id="validationCustom02" required>
+                    <option selected value="*">Tout</option>
+                    <option value="1">X5</option>
+                    <option value="2">X6</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom03" class="form-label">Date debut</label>
+                  <input type="date" class="form-control" id="validationCustom03" />
+                </div>
+                <div class="col-md-3">
+                <label for="validationCustom04" class="form-label">Date fin</label>
+                  <input type="date" class="form-control" id="validationCustom04" />
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom05" class="form-label">Valeur minimum</label>
+                  <input type="number" class="form-control" id="validationCustom05" />
+                </div>
+                <div class="col-md-3">
+                <label for="validationCustom06" class="form-label">Valeur maximum</label>
+                  <input type="number" class="form-control" id="validationCustom06" />
+                </div>
+                
+              </form>
               
-            </form>
-          </div>
-          </div>
-
+              <button className="btn btn-primary btn-ferme" onClick={handleToggleSearch}>
+                Fermer le recherche
+              </button>
+            </div>
+            ) : (
+              <button className="btn btn-primary btn-ouvre" onClick={handleToggleSearch}>
+                Faire de la recherche
+              </button>
+            )}
+        </div>
+        <div className="container table-container annonce-div">
+          <h1>Liste des annonces de vente de voitures</h1>
           <br></br>
           <div className='row'>
             {selectedAnnonce ? (
@@ -147,6 +168,7 @@ const ListAnnonce = () => {
             )}
           </div>
         </div>
+      </div>
       </main>
     </div>
   );
