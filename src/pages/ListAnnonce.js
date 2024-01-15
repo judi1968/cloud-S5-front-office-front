@@ -14,12 +14,6 @@ const ListAnnonce = () => {
     setIsSearchOpen(!isSearchOpen);
   };
 
-  const handleSearch = () => {
-    // Ajoutez ici la logique de recherche en fonction des champs du formulaire
-    console.log('Recherche effectuée');
-    // Vous pouvez réinitialiser les champs du formulaire ici si nécessaire
-    // setIsSearchOpen(false);
-  };
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const annoncesData = [
     {
