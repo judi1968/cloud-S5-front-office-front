@@ -1,3 +1,6 @@
+.header{
+    background-color: aliceblue;
+}
 .btn-primary{
     border-color: rgb(54, 54, 252);
     color: white;
@@ -5,4 +8,28 @@
 
 .btn-search{
     margin-right: 2%;
+}
+
+.btn-search:hover{
+    background-color: blue;
+}
+
+.nav-menu{
+    display: flex;
+    justify-content: center;
+    
+}
+.icon-header{
+    font-size: x-large;
+    margin-right: 3px;
+}
+.header-link{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.header-link:hover{
+    color: rgb(54, 54, 252);
+    padding-bottom: -10px;
+    border-bottom: -5px solid rgb(54, 54, 252);
 }

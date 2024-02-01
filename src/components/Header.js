@@ -1,12 +1,16 @@
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './../assets component/css/Header.css';
-function Header() {
+import { useState } from 'react';
+import { FaPowerOff, FaRegUserCircle } from 'react-icons/fa';
+import {AiOutlineMessage } from 'react-icons/ai';
+import { GoHome } from 'react-icons/go'
+
+const Header = () => {
+  const [isConnected,setIsConected] = useState(Boolean);
   return (
     <div className='header'>
       {['md'].map((expand) => (
@@ -21,37 +25,25 @@ function Header() {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  Offcanvas
+                  Menu
                 </Offcanvas.Title>
               </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="#action1">Accueil</Nav.Link>
-                  <Nav.Link href="#action2">Message</Nav.Link>
-                  <NavDropdown
-                    title="Dropdown"
-                    id={`offcanvasNavbarDropdown-expand-${expand}`}
-                  >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                      Something else here
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
+              <Offcanvas.Body className=''>
                 <Form className="d-flex">
                   <Form.Control
                     type="search"
-                    placeholder="Search"
+                    placeholder="recherche..."
                     className="me-2"
                     aria-label="Search"
                   />
-                  <Button variant="outline-success" className='btn-primary btn-search'>Search</Button>
                 </Form>
-                <a className='btn btn-danger btn-deconnection'>Deconnection</a>
+                <Nav className="justify-content-end ">
+                  <Nav.Link href="#action1" className='d-flex items-center header-link'><GoHome className='icon-header'/><span>Accueil</span></Nav.Link>
+                  <Nav.Link href="#action2" className='d-flex items-center header-link'><AiOutlineMessage className='icon-header'/><span>Message</span></Nav.Link>
+                  <Nav.Link href="#action1" className='d-flex items-center header-link'><FaRegUserCircle className='icon-header'/><span>Profil</span></Nav.Link>
+                </Nav>
+                
+                <a className='btn btn-danger d-flex items-center btn-deconnection'><FaPowerOff className='icon-header'></FaPowerOff> <span>Deconnection</span></a>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
