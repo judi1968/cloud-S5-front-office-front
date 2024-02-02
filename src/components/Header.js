@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -34,7 +35,7 @@ const Header = () => {
                   <Nav.Link href="#action1" className='d-flex items-center header-link'><FaRegUserCircle className='icon-header'/><span>Profil</span></Nav.Link>
                 </Nav>
                 
-                <a className='btn btn-danger d-flex items-center btn-deconnection'><FaPowerOff className='icon-header'></FaPowerOff> <span>Deconnection</span></a>
+                <a className='btn btn-danger d-flex items-center btn-deconnection' href='#'><FaPowerOff className='icon-header'></FaPowerOff> <span>Deconnection</span></a>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
