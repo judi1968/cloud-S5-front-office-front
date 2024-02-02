@@ -1,11 +1,12 @@
 import { FaSearch } from "react-icons/fa";
 import './../asset/css/style-color.css'
 import './../assets component/css/FormSearchMulitCritere.css'
+// import './../assets component/js/FormSearchMulitCritere'
 const FormSearchMulitCritere = () => {
     return(
         <div className="card container mt-5 p-4 mb-5 form-search-multi-critere">
             <center>
-                <h1 className="text-font-two">Faite des recherches multi-critere</h1>
+                <h1 className="text-font-two text-uppercase pb-4">Faite des recherches multi-critere</h1>
             </center>
             <form>
             <div className="row">
@@ -42,7 +43,7 @@ const FormSearchMulitCritere = () => {
                 </select>
                 </div>
                 <div class="col-md-4">
-                <label for="state" class="form-label">Categorie</label>
+                <label for="state" class="form-label">Freinage</label>
                 <select class="form-select" id="state">
                     <option value="">Limousine</option>
                     <option>Camion</option>
@@ -100,9 +101,10 @@ const FormSearchMulitCritere = () => {
 
           <hr class="my-4"/>
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Chercher <FaSearch></FaSearch></button>
+          <button class="w-100 btn btn-primary btn-lg" className="br-100" type="submit">Chercher <FaSearch></FaSearch></button>
           </form>
         </div>
+
     );
 }
 export default FormSearchMulitCritere;

@@ -1,11 +1,10 @@
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './../assets component/css/Header.css';
 import { useState } from 'react';
-import { FaPowerOff, FaRegUserCircle } from 'react-icons/fa';
+import { FaNewspaper, FaPowerOff, FaRegUserCircle } from 'react-icons/fa';
 import {AiOutlineMessage } from 'react-icons/ai';
 import { GoHome } from 'react-icons/go'
 
@@ -29,16 +28,10 @@ const Header = () => {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body className=''>
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="recherche..."
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                </Form>
+            
                 <Nav className="justify-content-end ">
-                  <Nav.Link href="#action1" className='d-flex items-center header-link'><GoHome className='icon-header'/><span>Accueil</span></Nav.Link>
+                  <Nav.Link href="/" className='d-flex items-center header-link'><GoHome className='icon-header'/><span>Accueil</span></Nav.Link>
+                  <Nav.Link href="/list-annonce" className='d-flex items-center header-link'><FaNewspaper className='icon-header'/><span>Annonce</span></Nav.Link>
                   <Nav.Link href="#action2" className='d-flex items-center header-link'><AiOutlineMessage className='icon-header'/><span>Message</span></Nav.Link>
                   <Nav.Link href="#action1" className='d-flex items-center header-link'><FaRegUserCircle className='icon-header'/><span>Profil</span></Nav.Link>
                 </Nav>

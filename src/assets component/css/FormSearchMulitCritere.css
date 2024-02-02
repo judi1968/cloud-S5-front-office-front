@@ -1,8 +1,10 @@
 .form-search-multi-critere{
-    background-color: rgb(251, 253, 255);
     border-color: #00000000;
-    box-shadow: 2px 2px 2px grey;
-    transition: 0.5s;
+    box-shadow: 2px 2px 10px rgb(193, 193, 193);    
+    /* opacity: 0; */
+    transform: translateY(15px);/* Déplacez la boîte vers le bas de 50px initialement*/
+    transition: opacity 1s ease, transform 1s ease;
+    border-radius: 0%;
 }
 .form-search-multi-critere:hover{
     transform: translateY(-5px);
