@@ -1,3 +1,15 @@
 .footer{
+    color:  white;
     background-color: rgb(81, 81, 255);
+}
+.footer ul{
+    list-style-type:none;
+}
+
+.footer .contact-part .contact-icon{
+    margin-right: 10px;
+}
+
+.footer .contact-part li{
+    margin-top: 10px;
 }

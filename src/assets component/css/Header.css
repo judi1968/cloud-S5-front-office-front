@@ -29,7 +29,8 @@
 }
 
 .header-link:hover{
-    color: rgb(54, 54, 252);
+    color: white;
     padding-bottom: -10px;
-    border-bottom: -5px solid rgb(54, 54, 252);
+    background-color:  rgb(54, 54, 252);
+    border-radius: 3px;
 }
