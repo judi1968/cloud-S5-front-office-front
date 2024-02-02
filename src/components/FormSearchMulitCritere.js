@@ -1,6 +1,6 @@
 const FormSearchMulitCritere = () => {
     return(
-        <div>
+        <div className="container mt-5 pb-5">
             <form>
             <div class="my-3">
             <div class="form-check">
