@@ -7,7 +7,7 @@ const Footer = () => {
     return(
         <div className="row footer">
             <div className='col-md-6 propos-part'>
-                jblkqr
+               
             </div>
             <div className='col-md-6 contact-part'>
                 <h1>Contact</h1>
