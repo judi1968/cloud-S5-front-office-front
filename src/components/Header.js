@@ -3,7 +3,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './../assets component/css/Header.css';
-import { useState } from 'react';
 import { FaNewspaper, FaPowerOff, FaRegUserCircle } from 'react-icons/fa';
 import {AiOutlineMessage } from 'react-icons/ai';
 import { GoHome } from 'react-icons/go'
