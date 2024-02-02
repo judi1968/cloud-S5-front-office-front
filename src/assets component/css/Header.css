@@ -23,14 +23,38 @@
     font-size: x-large;
     margin-right: 3px;
 }
-.header-link{
+.header-link {
+    position: relative;
     margin-left: 10px;
     margin-right: 10px;
+    overflow: hidden;
+    color: rgb(54, 54, 252);
+    text-decoration: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0);
+}
+
+.header-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(54, 54, 252); /* Couleur de fond de la bordure */
+    transition: width 0.5s ease; /* Transition sur la largeur */
+}
+
+.header-link:hover::before {
+    width: 100%;
 }
 
 .header-link:hover{
-    color: white;
-    padding-bottom: -10px;
-    background-color:  rgb(54, 54, 252);
-    border-radius: 3px;
+    color:  rgb(54, 54, 252);
 }
+
+
+
+
+
+
+
