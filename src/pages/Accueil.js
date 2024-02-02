@@ -1,3 +1,4 @@
+import ControlledCarousel from '../components/ControlledCarousel';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './../asset/css/Accueil.css';
@@ -5,70 +6,15 @@ import './../asset/css/Accueil.css';
 export const Accueil = () => {
     return(
         <div className='container-home'>
-            {/* Header */}
-            <div className='row position-fixed'>
+            <header>
                 <Header></Header>
-            </div>
-            <div className='row container-accueil'>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-                <h1>. </h1>
-            </div>
-            <div className='row'>
+            </header>
+
+                <ControlledCarousel></ControlledCarousel>
+                
+            <footer>
                 <Footer></Footer>
-            </div>
+            </footer>
         </div>
     );
 }
