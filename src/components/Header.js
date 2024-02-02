@@ -9,7 +9,6 @@ import {AiOutlineMessage } from 'react-icons/ai';
 import { GoHome } from 'react-icons/go'
 
 const Header = () => {
-  const [isConnected,setIsConected] = useState(Boolean);
   return (
     <div className='header'>
       {['md'].map((expand) => (
