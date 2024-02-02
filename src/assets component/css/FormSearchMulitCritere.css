@@ -1,0 +1,10 @@
+.form-search-multi-critere{
+    background-color: rgb(251, 253, 255);
+    border-color: #00000000;
+    box-shadow: 2px 2px 2px grey;
+    transition: 0.5s;
+}
+.form-search-multi-critere:hover{
+    transform: translateY(-5px);
+    transition: 0.5s;
+}

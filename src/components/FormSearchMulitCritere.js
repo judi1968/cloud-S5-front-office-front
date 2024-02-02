@@ -1,60 +1,106 @@
+import { FaSearch } from "react-icons/fa";
+import './../asset/css/style-color.css'
+import './../assets component/css/FormSearchMulitCritere.css'
 const FormSearchMulitCritere = () => {
     return(
-        <div className="container mt-5 pb-5">
+        <div className="card container mt-5 p-4 mb-5 form-search-multi-critere">
+            <center>
+                <h1 className="text-font-two">Faite des recherches multi-critere</h1>
+            </center>
             <form>
-            <div class="my-3">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required/>
-              <label class="form-check-label" for="credit">Credit card</label>
+            <div className="row">
+                <div class="col-md-4">
+                <label for="country" class="form-label">Marque</label>
+                <select class="form-select" id="country">
+                    <option value="">Audi</option>
+                    <option>Mercedes</option>
+                    <option>Porche</option>
+                </select>
+                </div>
+                <div class="col-md-4">
+                <label for="state" class="form-label">Categorie</label>
+                <select class="form-select" id="state">
+                    <option value="">Limousine</option>
+                    <option>Camion</option>
+                </select>
+                </div>
+                <div class="col-md-4">
+                <label for="state" class="form-label">Type caburant</label>
+                <select class="form-select" id="state" >
+                    <option value="">Essence</option>
+                    <option>Electrique</option>
+                </select>
+                </div>
             </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required/>
-              <label class="form-check-label" for="debit">Debit card</label>
+            <div className="row">
+                <div class="col-md-4">
+                <label for="country" class="form-label">Transmission</label>
+                <select class="form-select" id="country">
+                    <option value="">Audi</option>
+                    <option>Mercedes</option>
+                    <option>Porche</option>
+                </select>
+                </div>
+                <div class="col-md-4">
+                <label for="state" class="form-label">Categorie</label>
+                <select class="form-select" id="state">
+                    <option value="">Limousine</option>
+                    <option>Camion</option>
+                </select>
+                </div>
+                <div class="col-md-4">
+                <label for="state" class="form-label">Equipement interne</label>
+                <select class="form-select" id="state" >
+                    <option value="">Essence</option>
+                    <option>Electrique</option>
+                </select>
+                </div>
             </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required/>
-              <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-          </div>
+
 
           <div class="row gy-3">
             <div class="col-md-6">
-              <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required/>
-              <small class="text-muted">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
+              <label for="cc-name" class="form-label">Annee de fabrication</label>
+              <div className="row">
+                <div className="col-6">
+                    <input type="date" class="form-control col-6" id="cc-name" placeholder=""/>
+                    <small class="text-muted">Anne minimale </small>
+                </div>
+                <div className="col-6">
+                    <input type="date" class="form-control col-6" id="cc-name" placeholder=""/>
+                    <small class="text-muted">Anne minimale </small>
+                </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required/>
-              <div class="invalid-feedback">
-                Credit card number is required
+              <label for="cc-name" class="form-label">Date de l'annonce</label>
+              <div className="row">
+                <div className="col-6">
+                    <input type="date" class="form-control col-6" id="cc-name" placeholder=""/>
+                    <small class="text-muted">Date debut</small>
+                </div>
+                <div className="col-6">
+                    <input type="date" class="form-control col-6" id="cc-name" placeholder=""/>
+                    <small class="text-muted">Date fin</small>
+                </div>
               </div>
             </div>
 
             <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required/>
-              <div class="invalid-feedback">
-                Expiration date required
-              </div>
+              <label for="cc-expiration" class="form-label">Prix minimum</label>
+              <input type="number" class="form-control" id="cc-expiration" placeholder="An Ariary" />
             </div>
 
             <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required/>
-              <div class="invalid-feedback">
-                Security code required
-              </div>
+              <label for="cc-cvv" class="form-label">Prix maximum</label>
+              <input type="number" class="form-control" id="cc-cvv" placeholder="en Ariary" />
             </div>
           </div>
 
           <hr class="my-4"/>
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Chercher <FaSearch></FaSearch></button>
           </form>
         </div>
     );
