@@ -1,4 +1,3 @@
-import { Container } from 'react-bootstrap';
 import ControlledCarousel from '../components/ControlledCarousel';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
