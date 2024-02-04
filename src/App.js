@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import ListAnnonce from './pages/ListAnnonce';
 import { Accueil } from './pages/Accueil';
 import Annonces from './pages/Annonces';
+import Message from './pages/Message';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<ListAnnonce />} />
           <Route path='/list-annonce' element={<Annonces />} />
+          <Route path='/message' element={<Message />} />
         </Routes>
     </Router>
   );

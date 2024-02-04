@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className='header'>
       {['md'].map((expand) => (
-        <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3">
+        <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3 fixed-top">
           <Container fluid>
             <Navbar.Brand href="#"><img src="%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0) large.png" alt="logo du VaikaNet" /></Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -31,7 +31,7 @@ const Header = () => {
                 <Nav className="justify-content-end ">
                   <Nav.Link href="/" className='d-flex items-center header-link'><GoHome className='icon-header'/><span>Accueil</span></Nav.Link>
                   <Nav.Link href="/list-annonce" className='d-flex items-center header-link'><FaNewspaper className='icon-header'/><span>Annonce</span></Nav.Link>
-                  <Nav.Link href="#action2" className='d-flex items-center header-link'><AiOutlineMessage className='icon-header'/><span>Message</span></Nav.Link>
+                  <Nav.Link href="/message" className='d-flex items-center header-link'><AiOutlineMessage className='icon-header'/><span>Message</span></Nav.Link>
                   <Nav.Link href="#action1" className='d-flex items-center header-link'><FaRegUserCircle className='icon-header'/><span>Profil</span></Nav.Link>
                 </Nav>
                 

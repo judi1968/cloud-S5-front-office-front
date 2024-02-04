@@ -11,6 +11,7 @@ const Annonces = () => {
             </header>
                 <CarouselAnnonce></CarouselAnnonce>
                 <AnnonceBand title="Plus recent"></AnnonceBand>   
+                <AnnonceBand title="Moin chere"></AnnonceBand>   
             <footer>
                 <Footer></Footer>
             </footer>
