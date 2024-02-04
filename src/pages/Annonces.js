@@ -1,4 +1,4 @@
-import AnnonceHeader from "../components/AnnonceHeader";
+import AnnonceBand from "../components/AnnonceBand";
 import CarouselAnnonce from "../components/CarouselAnnonce";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -10,7 +10,7 @@ const Annonces = () => {
                 <Header></Header>
             </header>
                 <CarouselAnnonce></CarouselAnnonce>
-                <AnnonceHeader></AnnonceHeader>       
+                <AnnonceBand title="Plus recent"></AnnonceBand>   
             <footer>
                 <Footer></Footer>
             </footer>
