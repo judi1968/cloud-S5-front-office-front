@@ -4,6 +4,9 @@ import { Modal } from 'react-bootstrap';
 import './../assets component/css/AnnonceBand.css';
 import { TiArrowBack } from "react-icons/ti";
 const AnnonceModal = ({ show, handleClose, annonce }) => {
+  const handleAcheter = () => {
+    console.log('okay');
+  }
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -16,10 +19,10 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
             <p>Marque: {annonce.marque}</p>
             <p>Catégorie: {annonce.categorie}</p>
             <p>Prix: {annonce.prix}</p>
-            <p>Couleur: {annonce.couleur}</p>
+            <p>Couleur: #{annonce.couleur}</p>
             {/* Ajoutez d'autres détails de l'annonce ici */}
-            <a href="#" className='btn-acheter' >Acheter</a>
-
+            <a href="#" className='btn-acheter' onClick={handleAcheter}>Acheter</a>
+            <a href="#" className='btn-contacter' onClick={handleAcheter}>Contacter</a>
           </div>
         )}
       </Modal.Body>
@@ -32,56 +35,10 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
   );
 };
 
-const ContactModal = ({ showContactModal, handleCloseContactModal, sellerDetails }) => {
-  return (
-    <Modal show={showContactModal} onHide={handleCloseContactModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Contacter le vendeur</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {sellerDetails && (
-          <div>
-            <p>Nom du vendeur: {sellerDetails.nom} {sellerDetails.prenom}</p>
-            {/* Ajoutez d'autres détails du vendeur ici */}
-            <p>Adresse email: {sellerDetails.email}</p>
-            <p>Numéro de téléphone: {sellerDetails.telephone}</p>
-          </div>
-        )}
-      </Modal.Body>
-      <Modal.Footer>
-        <button className="btn btn-secondary" onClick={handleCloseContactModal}>
-          Fermer
-        </button>
-      </Modal.Footer>
-    </Modal>
-  );
-};
-
 const AnnonceBand = ({ title,onChangePage,isShowAll }) => {
   const [annoncesData, setAnnonceData] = useState([]);
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [showContactModal, setShowContactModal] = useState(false);
-  const [sellerDetails,setSellerDetails] = useState(null)
-  const handleContactClick = (annonce) => {
-    // Vous pouvez remplir ces détails en fonction de vos besoins
-    const sellerDetails = {
-      nom: selectedAnnonce.nom,
-      prenom: selectedAnnonce.prenom,
-      email: 'exemple@email.com',
-      telephone: '123-456-7890',
-      // Ajoutez d'autres détails du vendeur ici
-    };
-
-    setShowContactModal(true);
-    setSellerDetails(sellerDetails);
-  };
-
-  const handleCloseContactModal = () => {
-    setShowContactModal(false);
-  };
-
-
 
   useEffect(() => {
     const annonces = [
@@ -100,6 +57,8 @@ const AnnonceBand = ({ title,onChangePage,isShowAll }) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+
 
   return (
     <div className="row align-items-md-stretch annonce-band">
@@ -120,8 +79,6 @@ const AnnonceBand = ({ title,onChangePage,isShowAll }) => {
                 <p className="card-text mb-auto"><strong>Prix : </strong>{annonce.prix}</p>
                 <p className="card-text mb-auto"><strong>Couleur : </strong><span style={{ color: 'rgba(0,0,0,0)', backgroundColor: `#${annonce.couleur}`, borderRadius: '5px' }}>................</span></p>
                 <a href="#" className="stretched-link btn-voir-detail" onClick={() => handleVoirToutClick(annonce)}>Voir le détail</a>
-                <a href="#" className="stretched-link btn-voir-detail" onClick={() => handleContactClick(annonce)}>Contacter</a>
-                <a href="#" className='btn-acheter'>Acheter</a>
               </div>
             </div>
           </div>
@@ -134,7 +91,6 @@ const AnnonceBand = ({ title,onChangePage,isShowAll }) => {
       ) : (null)}
       <hr></hr>
       <AnnonceModal show={showModal} handleClose={handleCloseModal} annonce={selectedAnnonce} />
-      <ContactModal showContactModal={showContactModal} handleCloseContactModal={handleCloseContactModal} sellerDetails={sellerDetails} />
     </div>
   );
 }

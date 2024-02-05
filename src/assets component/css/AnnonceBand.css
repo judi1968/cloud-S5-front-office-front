@@ -24,3 +24,12 @@
     margin-top: 5px;
     border-radius: 20px;
 }
+.btn-contacter{
+    padding: 5px 20px 5px 20px;
+    background-color: rgb(214, 200, 0);
+    max-width: max-content;
+    color: white;
+    text-decoration: none;
+    margin-top: 5px;
+    border-radius: 20px;
+}
