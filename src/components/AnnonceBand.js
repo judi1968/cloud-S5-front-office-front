@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 import { GrNext } from "react-icons/gr";
 import { Modal } from 'react-bootstrap';
