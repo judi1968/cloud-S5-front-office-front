@@ -30,7 +30,7 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
   );
 };
 
-const AnnonceBand = ({ title,clickShow }) => {
+const AnnonceBand = ({ title,onChangePage }) => {
   const [annoncesData, setAnnonceData] = useState([]);
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -72,7 +72,7 @@ const AnnonceBand = ({ title,clickShow }) => {
           </div>
         ))}
       </div>
-      <p className='text-end '><a className='btn btn-primary' style={{ marginRight: '5%' }} onClick={() => clickShow()}><FaEye style={{ marginRight: '5px' }}></FaEye>Voir tout</a></p>
+      <p className='text-end '><a className='btn btn-primary' style={{ marginRight: '5%' }} onClick={() => onChangePage()}><FaEye style={{ marginRight: '5px' }}></FaEye>Voir tout</a></p>
       <hr></hr>
       <AnnonceModal show={showModal} handleClose={handleCloseModal} annonce={selectedAnnonce} />
     </div>
