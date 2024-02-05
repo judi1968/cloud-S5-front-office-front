@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from "react";
 import './../assets component/css/Conversation.css'
-import { FaBackspace } from "react-icons/fa";
+import { FaBackspace, FaPaperPlane } from "react-icons/fa";
 
 const Conversation = ({
     returnToMessageGeneral
@@ -26,9 +26,11 @@ const Conversation = ({
     return(
         <div className="container-conversation">
             <a className="btn-back" onClick={returnToMessageGeneral}><FaBackspace></FaBackspace> Retour</a>
+            <center style={{marginTop:'5px'}}>
             <h2>
                 Conversation avec Rakoto
             </h2>   
+            </center>
             <ul>
             {conversationData?.map((conversation) => (
                 <>
@@ -41,7 +43,12 @@ const Conversation = ({
                 </>
             ))}
             </ul>
-            
+            <div className="form-send-message">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control col-10" placeholder="Ecrire un message" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                    <button class="btn btn-outline-secondary col-2" type="button" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
+                </div>
+            </div>
         </div>
     )
 }
