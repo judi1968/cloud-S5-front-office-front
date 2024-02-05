@@ -3,10 +3,12 @@ import { GrNext } from "react-icons/gr";
 import { Modal } from 'react-bootstrap';
 import './../assets component/css/AnnonceBand.css';
 import { TiArrowBack } from "react-icons/ti";
+import { FaPaperPlane } from 'react-icons/fa';
 const AnnonceModal = ({ show, handleClose, annonce }) => {
   const handleAcheter = () => {
     console.log('okay');
   }
+  
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -22,7 +24,12 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
             <p>Couleur: #{annonce.couleur}</p>
             {/* Ajoutez d'autres détails de l'annonce ici */}
             <a href="#" className='btn-acheter' onClick={handleAcheter}>Acheter</a>
-            <a href="#" className='btn-contacter' onClick={handleAcheter}>Contacter</a>
+            <div className="form-send-message" style={{marginTop:'10px'}}>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                    <button class="btn btn-outline-secondary col-2" type="button" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
+                </div>
+            </div>
           </div>
         )}
       </Modal.Body>
