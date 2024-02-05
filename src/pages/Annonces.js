@@ -17,15 +17,31 @@ const Annonces = () => {
                 <CarouselAnnonce></CarouselAnnonce>
                 {annoncePage === 0 ? (
                     <>
-                        <AnnonceBand title="Plus recent" onChangePage={() => handleToChangeAnnoncePage(1)} />
-                        <AnnonceBand title="Moin chere" onChangePage={() => handleToChangeAnnoncePage(2)} />
+                        <AnnonceBand 
+                            title="Plus recent" 
+                            onChangePage={() => handleToChangeAnnoncePage(1)} 
+                            isShowAll={false}    
+                        />
+                        <AnnonceBand 
+                            title="Moin chere" 
+                            onChangePage={() => handleToChangeAnnoncePage(2)} 
+                            isShowAll={false}    
+                        />
                     </>
                     ) : (
                     <>
                         {annoncePage === 1 ? (
-                        <AnnonceBand title="Plus recent" onChangePage={() => handleToChangeAnnoncePage(0)} />
+                        <AnnonceBand 
+                            title="Plus recent" 
+                            onChangePage={() => handleToChangeAnnoncePage(0)} 
+                            isShowAll={true}    
+                        />
                         ) : (
-                        <AnnonceBand title="Moin chere" onChangePage={() => handleToChangeAnnoncePage(0)} />
+                        <AnnonceBand 
+                            title="Moin chere" 
+                            onChangePage={() => handleToChangeAnnoncePage(0)} 
+                            isShowAll={true}
+                        />
                         )}
                     </>
                     )}

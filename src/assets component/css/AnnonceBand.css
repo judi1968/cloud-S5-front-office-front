@@ -6,3 +6,21 @@
     color: rgb(81, 81, 255);
     padding-left: 10%;
 }
+.annonce-band .btn-voir-detail{
+    padding: 5px 20px 5px 20px;
+    background-color: rgb(81, 81, 255);
+    max-width: max-content;
+    color: white;
+    text-decoration: none;
+    margin-top: 5px;
+    border-radius: 20px;
+}
+.btn-acheter{
+    padding: 5px 20px 5px 20px;
+    background-color: rgb(107, 195, 60);
+    max-width: max-content;
+    color: white;
+    text-decoration: none;
+    margin-top: 5px;
+    border-radius: 20px;
+}
