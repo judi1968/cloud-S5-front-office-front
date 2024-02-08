@@ -111,7 +111,7 @@ const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
       ) : (null)}
       <h1 className='title'>{title}</h1>
       <div className="row mb-2">
-        {annoncesData?.slice(0, annonceLimit).map((annonce) => (
+        {annoncesData?.map((annonce) => (
           <div className="col-md-4" key={annonce.annonce.annonceId}>
             <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
               <div className="col p-4 d-flex flex-column position-static">
