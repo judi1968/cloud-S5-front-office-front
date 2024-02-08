@@ -64,6 +64,7 @@ const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
       if (response.ok) {
           const data = await response.json();
           setAnnonceData(data.annoces);
+          isShowAll===true?setAnnonceLimit(limit):setAnnonceLimit(annoncesData.length)
         }else{
           Navigate('/error', {
             state: {
@@ -87,7 +88,7 @@ const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
   };
   useEffect(() => {
     fetchData();
-    isShowAll===true?setAnnonceLimit(limit):setAnnonceLimit(annoncesData.length)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   const handleVoirToutClick = (annonce) => {
