@@ -15,7 +15,7 @@ const Login = () => {
     // Pour l'instant, nous supposons que la connexion réussit si le nom n'est pas vide
     if (name.trim() !== '') {
       setLoginStatus('success');
-      navigate('/home'); // Redirection vers "/home"
+      navigate('/'); // Redirection vers "/home"
     } else {
       setLoginStatus('failure');
     }

@@ -1,1 +1,3 @@
-export const isConnected
+export const isConnected = () => {
+    return localStorage.getItem('tknclient');
+}
