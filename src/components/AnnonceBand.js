@@ -8,10 +8,28 @@ import { FaPaperPlane } from 'react-icons/fa';
 import { Navigate } from 'react-router-dom';
 import { api_domain } from '../services/serviceAPI';
 import { formaterDate, formaterPrix } from '../services/formate.service';
+import { connect_token } from '../services/token.service';
 const AnnonceModal = ({ show, handleClose, annonce }) => {
   const handleAcheter = () => {
     console.log('okay');
   }
+  const [isConnected, setIsConnected] = useState(false);
+  const checkConnection = async () => {
+    try {
+      const data = await connect_token();
+      if (data.status === 200) {
+        setIsConnected(true);
+      } else {
+        setIsConnected(false);
+      }
+    } catch (error) {
+      console.error('Une erreur est survenue lors de la récupération de la personne:', error);
+    }
+  };
+
+  useEffect(() => {
+    checkConnection();
+  }, []);
   
   return (
     <Modal show={show} onHide={handleClose}>
@@ -32,16 +50,18 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
             <p><strong>Transmission :</strong> {annonce.catalogVoiture.transmissionVoitureNom}</p>
             <p><strong>Freinage :</strong> {annonce.catalogVoiture.freignageVoitureNom}</p>
             <p><strong>Prix :</strong> {formaterPrix(annonce.voiturePrix.prix)}</p>
-            <p><strong>Commission:</strong> {formaterPrix(annonce.annonce.commission)}</p>
-            {/* Ajoutez d'autres détails de l'annonce ici */}
-            <a href="#" className='btn-acheter' onClick={handleAcheter}>Acheter</a>
-            <div className="form-send-message" style={{marginTop:'10px'}}>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                    <button class="btn btn-outline-secondary col-2" type="button" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
-                </div>
+            {isConnected? (
+              <>
+                  <a href="#" className='btn-acheter' onClick={handleAcheter}>Acheter</a>
+                  <div className="form-send-message" style={{marginTop:'10px'}}>
+                      <div class="input-group mb-3">
+                          <input type="text" class="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                          <button class="btn btn-outline-secondary col-2" type="button" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
+                      </div>
+                  </div>
+              </>
+            ) : (<></>)}
             </div>
-          </div>
         )}
       </Modal.Body>
       <Modal.Footer>

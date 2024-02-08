@@ -12,10 +12,10 @@ import { connect_token } from '../services/token.service';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const [isConnected, setIsConnected] = useState(false);
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
-
+  
+  const [isConnected, setIsConnected] = useState(false);
   const checkConnection = async () => {
     try {
       const data = await connect_token();
