@@ -7,8 +7,39 @@ import './../assets component/css/Header.css';
 import { FaNewspaper, FaPowerOff, FaRegUserCircle } from 'react-icons/fa';
 import {AiOutlineMessage } from 'react-icons/ai';
 import { GoHome } from 'react-icons/go'
+import { useEffect, useState } from 'react';
+import { connect_token } from '../services/token.service';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const [etatConnection,setEtatConnection] = useState([])
+  const [isConnected,setIsConected] = useState(false)
+  const [username,setUsername] = useState('')
+  const checkConnection = async () => {
+    try {
+        const data = await connect_token();
+
+        const personne = data;
+        setEtatConnection(personne)
+        if (etatConnection.status===200) {
+          setIsConected(true)
+          setUsername(personne.personne.personne.nom)
+        }else{
+
+        }
+
+    } catch (error) {
+        console.error('Une erreur est survenue lors de la récupération de la personne:', error);
+    }
+};
+useEffect(() => {
+  checkConnection();
+}, []);
+const navigate = useNavigate();
+const disconnectAction = () => {
+  localStorage.removeItem();
+  navigate('/')
+}
   return (
     <div className='header'>
       {['md'].map((expand) => (
@@ -32,10 +63,24 @@ const Header = () => {
                   <Nav.Link href="/" className='d-flex items-center header-link'><GoHome className='icon-header'/><span>Accueil</span></Nav.Link>
                   <Nav.Link href="/list-annonce" className='d-flex items-center header-link'><FaNewspaper className='icon-header'/><span>Annonce</span></Nav.Link>
                   <Nav.Link href="/message" className='d-flex items-center header-link'><AiOutlineMessage className='icon-header'/><span>Message</span></Nav.Link>
-                  <Nav.Link href="#action1" className='d-flex items-center header-link'><FaRegUserCircle className='icon-header'/><span>Profil</span></Nav.Link>
+                  {isConnected?(
+                    <>
+                    <Nav.Link href="#action1" className='d-flex items-center header-link' style={{color:'black'}}><FaRegUserCircle className='icon-header'/><span>{username}</span></Nav.Link>
+                  </>
+                 ) : (
+                 <>
+                 </>
+                  )}
                 </Nav>
-                
-                <a className='btn btn-success d-flex items-center btn-deconnection' href='/login'><FaPowerOff className='icon-header'></FaPowerOff><span> Connecter</span></a>
+                {!isConnected?(
+                  <>
+                    <a className='btn btn-success d-flex items-center btn-deconnection' href='/login'><FaPowerOff className='icon-header'></FaPowerOff><span> Connecter</span></a>
+                  </>
+                 ) : (
+                 <>
+                   <a className='btn btn-danger d-flex items-center btn-deconnection' onClick={disconnectAction}><FaPowerOff className='icon-header'></FaPowerOff><span> deconnecter</span></a>
+                 </>
+                  )}
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

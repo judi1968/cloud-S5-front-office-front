@@ -65,7 +65,6 @@ const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
         },
       });
       if (response.ok) {
