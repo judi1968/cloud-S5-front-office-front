@@ -7,6 +7,7 @@ import { TiArrowBack } from "react-icons/ti";
 import { FaPaperPlane } from 'react-icons/fa';
 import { Navigate } from 'react-router-dom';
 import { api_domain } from '../services/serviceAPI';
+import { formaterDate, formaterPrix } from '../services/formate.service';
 const AnnonceModal = ({ show, handleClose, annonce }) => {
   const handleAcheter = () => {
     console.log('okay');
@@ -86,7 +87,7 @@ const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
   };
   useEffect(() => {
     fetchData();
-    isShowAll===false?setAnnonceLimit(limit):setAnnonceLimit(annoncesData.length)
+    isShowAll===true?setAnnonceLimit(limit):setAnnonceLimit(annoncesData.length)
   }, []);
   
   const handleVoirToutClick = (annonce) => {
@@ -114,9 +115,10 @@ const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
             <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
               <div className="col p-4 d-flex flex-column position-static">
                 <strong className="d-inline-block mb-2 text-primary">{annonce.personneClient.nom} {annonce.personneClient.prenom}</strong>
+                <small>{formaterDate(annonce.annonceValidee.dateValidation)}</small>
                 <h3 className="mb-0">{annonce.catalogVoiture.marqueVoitureNom} | {annonce.catalogVoiture.categorieVoitureNom} </h3>
                 <div className="mb-1 text-muted">{annonce.dateModification}</div>
-                <p className="card-text mb-auto"><strong>Prix : </strong>{annonce.voiturePrix.prix}</p>
+                <p className="card-text mb-auto"><strong>Prix : </strong>{formaterPrix(annonce.voiturePrix.prix)}</p>
                 <p className="card-text mb-auto"><strong>Couleur : </strong><span style={{ color: 'rgba(0,0,0,0)', backgroundColor: `#${annonce.catalogVoiture.couleur}`, borderRadius: '5px' }}>................</span></p>
                 <a href="#" className="stretched-link btn-voir-detail" onClick={() => handleVoirToutClick(annonce)}>Voir le détail</a>
               </div>

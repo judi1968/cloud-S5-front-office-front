@@ -44,7 +44,7 @@ const Annonces = () => {
                         />
                         ) : (
                         <AnnonceBand 
-                            title="Moin cheres" 
+                            title="Moin chere" 
                             onChangePage={() => handleToChangeAnnoncePage(0)} 
                             isShowAll={true}
                             limit={8}
