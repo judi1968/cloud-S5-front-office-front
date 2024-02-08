@@ -9,11 +9,11 @@ import {AiOutlineMessage } from 'react-icons/ai';
 import { GoHome } from 'react-icons/go'
 import { useEffect, useState } from 'react';
 import { connect_token } from '../services/token.service';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [etatConnection,setEtatConnection] = useState([])
-  const [isConnected,setIsConected] = useState(false)
+  const [isConnected,setIsConected] = useState()
   const [username,setUsername] = useState('')
   const checkConnection = async () => {
     try {
@@ -25,7 +25,7 @@ const Header = () => {
           setIsConected(true)
           setUsername(personne.personne.personne.nom)
         }else{
-
+          setIsConected(false)
         }
 
     } catch (error) {
