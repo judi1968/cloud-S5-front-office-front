@@ -21,11 +21,15 @@ const Annonces = () => {
                             title="Plus recent" 
                             onChangePage={() => handleToChangeAnnoncePage(1)} 
                             isShowAll={false}    
+                            limit={3}
+                            url="annonce_valides_recent"
                         />
                         <AnnonceBand 
                             title="Moin chere" 
                             onChangePage={() => handleToChangeAnnoncePage(2)} 
-                            isShowAll={false}    
+                            isShowAll={false}
+                            limit={3}
+                            url="annonce_valides_moin_chere" 
                         />
                     </>
                     ) : (
@@ -34,13 +38,17 @@ const Annonces = () => {
                         <AnnonceBand 
                             title="Plus recent" 
                             onChangePage={() => handleToChangeAnnoncePage(0)} 
-                            isShowAll={true}    
+                            isShowAll={true}
+                            limit={8} 
+                            url="annonce_valides_recent"
                         />
                         ) : (
                         <AnnonceBand 
-                            title="Moin chere" 
+                            title="Moin cheres" 
                             onChangePage={() => handleToChangeAnnoncePage(0)} 
                             isShowAll={true}
+                            limit={8}
+                            url="annonce_valides_moin_chere"
                         />
                         )}
                     </>

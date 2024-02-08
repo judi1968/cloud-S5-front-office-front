@@ -5,6 +5,8 @@ import { Modal } from 'react-bootstrap';
 import './../assets component/css/AnnonceBand.css';
 import { TiArrowBack } from "react-icons/ti";
 import { FaPaperPlane } from 'react-icons/fa';
+import { Navigate } from 'react-router-dom';
+import { api_domain } from '../services/serviceAPI';
 const AnnonceModal = ({ show, handleClose, annonce }) => {
   const handleAcheter = () => {
     console.log('okay');
@@ -43,20 +45,50 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
   );
 };
 
-const AnnonceBand = ({ title,onChangePage,isShowAll }) => {
+const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
   const [annoncesData, setAnnonceData] = useState([]);
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [annonceLimit,setAnnonceLimit] = useState(0);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${api_domain}${url}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+        },
+      });
+      if (response.ok) {
+          const data = await response.json();
+          setAnnonceData(data.annoces);
+        }else{
+          Navigate('/error', {
+            state: {
+              errorStatus: response.status,
+              errorMessage: response.message,
+              errorTitle: response.title,
+            },
+          });
+        }
+      
+    } catch (error) {
+      console.error('Erreur lors de la demande au serveur:', error);
+      Navigate('/error', {
+        state: {
+          errorStatus: 404,
+          errorMessage: error,
+          errorTitle: `Erreur lors de la demande au serveur`,
+        },
+      });
+    }
+  };
   useEffect(() => {
-    const annonces = [
-      { id: 'ANC0001', nom: 'Rakoto', prenom: 'Jean', marque: 'Audi', categorie: 'Limousine', prix: 1500000, couleur: "45eeff", dateModification: '24-04-2001' },
-      { id: 'ANC0002', nom: 'Rabe', prenom: 'Jons', marque: 'BMW', categorie: 'Camion', prix: 1570000, couleur: "453ef5", dateModification: '24-04-2001' },
-      { id: 'ANC0003', nom: 'Razaka', prenom: 'Rasoa', marque: 'Chevrolet', categorie: 'Sprinter', prix: 1200000, couleur: "f5e6ff", dateModification: '24-04-2001' }
-    ];
-    setAnnonceData(annonces);
+    fetchData();
+    isShowAll===false?setAnnonceLimit(limit):setAnnonceLimit(annoncesData.length)
   }, []);
-
+  
   const handleVoirToutClick = (annonce) => {
     setSelectedAnnonce(annonce);
     setShowModal(true);
@@ -77,15 +109,15 @@ const AnnonceBand = ({ title,onChangePage,isShowAll }) => {
       ) : (null)}
       <h1 className='title'>{title}</h1>
       <div className="row mb-2">
-        {annoncesData?.map((annonce) => (
-          <div className="col-md-4" key={annonce.id}>
+        {annoncesData?.slice(0, annonceLimit).map((annonce) => (
+          <div className="col-md-4" key={annonce.annonce.annonceId}>
             <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
               <div className="col p-4 d-flex flex-column position-static">
-                <strong className="d-inline-block mb-2 text-primary">{annonce.nom} {annonce.prenom}</strong>
-                <h3 className="mb-0">{annonce.marque} | {annonce.categorie} </h3>
+                <strong className="d-inline-block mb-2 text-primary">{annonce.personneClient.nom} {annonce.personneClient.prenom}</strong>
+                <h3 className="mb-0">{annonce.catalogVoiture.marqueVoitureNom} | {annonce.catalogVoiture.categorieVoitureNom} </h3>
                 <div className="mb-1 text-muted">{annonce.dateModification}</div>
-                <p className="card-text mb-auto"><strong>Prix : </strong>{annonce.prix}</p>
-                <p className="card-text mb-auto"><strong>Couleur : </strong><span style={{ color: 'rgba(0,0,0,0)', backgroundColor: `#${annonce.couleur}`, borderRadius: '5px' }}>................</span></p>
+                <p className="card-text mb-auto"><strong>Prix : </strong>{annonce.voiturePrix.prix}</p>
+                <p className="card-text mb-auto"><strong>Couleur : </strong><span style={{ color: 'rgba(0,0,0,0)', backgroundColor: `#${annonce.catalogVoiture.couleur}`, borderRadius: '5px' }}>................</span></p>
                 <a href="#" className="stretched-link btn-voir-detail" onClick={() => handleVoirToutClick(annonce)}>Voir le détail</a>
               </div>
             </div>
