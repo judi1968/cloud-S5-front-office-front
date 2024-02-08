@@ -65,6 +65,7 @@ const AnnonceBand = ({ title,onChangePage,url,isShowAll,limit }) => {
           const data = await response.json();
           setAnnonceData(data.annoces);
           isShowAll===true?setAnnonceLimit(limit):setAnnonceLimit(annoncesData.length)
+          console.log(annonceLimit);
         }else{
           Navigate('/error', {
             state: {
