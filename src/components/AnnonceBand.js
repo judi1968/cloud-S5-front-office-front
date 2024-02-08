@@ -21,11 +21,18 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
       <Modal.Body>
         {annonce && (
           <div>
-            <p>Nom: {annonce.nom} {annonce.prenom}</p>
-            <p>Marque: {annonce.marque}</p>
-            <p>Catégorie: {annonce.categorie}</p>
-            <p>Prix: {annonce.prix}</p>
-            <p>Couleur: #{annonce.couleur}</p>
+            <p><strong>Nom :</strong> {annonce.personneClient.nom} {annonce.personneClient.prenom}</p>
+            <p><strong>Couleur : </strong> <span style={{ background: `#${annonce.catalogVoiture.couleur}` , color: `rgba(0,0,0,0)`, borderRadius: '5px'}}> ...................</span> </p>
+            <p><strong>Annee de fabrication :</strong> {formaterDate(annonce.catalogVoiture.anneeFabrication)}</p>
+            <p><strong>Consommation :</strong> {annonce.catalogVoiture.consommation}</p>
+            <p><strong>Categorie :</strong> {annonce.catalogVoiture.categorieVoitureNom}</p>
+            <p><strong>Marque :</strong> {annonce.catalogVoiture.marqueVoitureNom}</p>
+            <p><strong>Date de creation :</strong> {formaterDate(annonce.catalogVoiture.marqueVoitureDateCretion)}</p>
+            <p><strong>Type de carburant :</strong> {annonce.catalogVoiture.typeCarburantNom}</p>
+            <p><strong>Transmission :</strong> {annonce.catalogVoiture.transmissionVoitureNom}</p>
+            <p><strong>Freinage :</strong> {annonce.catalogVoiture.freignageVoitureNom}</p>
+            <p><strong>Prix :</strong> {formaterPrix(annonce.voiturePrix.prix)}</p>
+            <p><strong>Commission:</strong> {formaterPrix(annonce.annonce.commission)}</p>
             {/* Ajoutez d'autres détails de l'annonce ici */}
             <a href="#" className='btn-acheter' onClick={handleAcheter}>Acheter</a>
             <div className="form-send-message" style={{marginTop:'10px'}}>
