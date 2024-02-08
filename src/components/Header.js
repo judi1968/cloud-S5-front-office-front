@@ -64,7 +64,7 @@ const Header = () => {
                   <Nav.Link href="/list-annonce" className='d-flex items-center header-link'><FaNewspaper className='icon-header' /><span>Annonce</span></Nav.Link>
                   <Nav.Link href="/message" className='d-flex items-center header-link'><AiOutlineMessage className='icon-header' /><span>Message</span></Nav.Link>
                   {isConnected ? (
-                    <Nav.Link href="#action1" className='d-flex items-center header-link' style={{ color: 'black' }}><FaRegUserCircle className='icon-header' /><span>{username}</span></Nav.Link>
+                    <Nav.Link href="#" className='d-flex items-center header-link' style={{ color: 'black' }}><FaRegUserCircle className='icon-header' /><span>{username}</span></Nav.Link>
                   ) : null}
                 </Nav>
                 {!isConnected ? (
