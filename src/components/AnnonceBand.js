@@ -10,8 +10,25 @@ import { api_domain } from '../services/serviceAPI';
 import { formaterDate, formaterPrix } from '../services/formate.service';
 import { connect_token } from '../services/token.service';
 const AnnonceModal = ({ show, handleClose, annonce }) => {
-  const handleAcheter = () => {
-    console.log('okay');
+  const handleAcheter = async (idAnnonce) => {
+      try {
+      const response = await fetch(`${api_domain}achete_voiture`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidclient")}`
+        },
+        body: JSON.stringify({
+          id_annonce: idAnnonce,
+        }),
+      });
+      console.log(response);
+    } catch (error) {
+        return {
+            status:500,
+            message:'Erreur lors de la demande au serveur:'.error
+      };
+    }
   }
   const [isConnected, setIsConnected] = useState(false);
   const checkConnection = async () => {
@@ -52,7 +69,7 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
             <p><strong>Prix :</strong> {formaterPrix(annonce.voiturePrix.prix)}</p>
             {isConnected? (
               <>
-                  <a href="#" className='btn-acheter' onClick={handleAcheter}>Acheter</a>
+                  <a className='btn-acheter' onClick={() => handleAcheter(annonce.annonce.annonceId)} style={{cursor:'pointer'}}>Acheter</a>
                   <div className="form-send-message" style={{marginTop:'10px'}}>
                       <div class="input-group mb-3">
                           <input type="text" class="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
