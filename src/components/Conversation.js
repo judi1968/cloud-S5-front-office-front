@@ -40,6 +40,7 @@ const Conversation = ({
 
     const [isConnected, setIsConnected] = useState(false);
     const [messageData,setMessageData] = useState('');
+    // eslint-disable-next-line no-unused-vars
     const [personneConnectedData, setPersonneConnectedData] = useState([]);
     const sendMessage = async (idPersonne) => {
     if (messageData.trim().length > 0) { 
