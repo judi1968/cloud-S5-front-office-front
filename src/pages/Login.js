@@ -5,8 +5,8 @@ import { api_domain } from '../services/serviceAPI';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('vaikanet@client.com');
+  const [password, setPassword] = useState('client');
   const [loginStatus, setLoginStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
