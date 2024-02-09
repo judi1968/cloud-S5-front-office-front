@@ -2,28 +2,92 @@
 import { useEffect, useState } from "react";
 import './../assets component/css/Conversation.css'
 import { FaBackspace, FaPaperPlane } from "react-icons/fa";
+import { api_domain } from "../services/serviceAPI";
+import { connect_token } from "../services/token.service";
 
 const Conversation = ({
     returnToMessageGeneral,
-    personneSelected
+    personneSelected,
+    personneAuthSelected
 }) => {
     // style
-
-
     const [conversationData,setConversationData] = useState([]);
-    useEffect(()=>{
-        const conversations = [
-            {id:'PERS002',message:'Bonjour, je suis interesse de votre annonce, puis-je j avoire plus de detail',isPropriety:false},
-            {id:'PERS002',message:'Bonjour',isPropriety:true},
-            {id:'PERS002',message:'Ca va ?',isPropriety:false},
-            {id:'PERS002',message:'oui et toi',isPropriety:true},
-            {id:'PERS002',message:'Ca va',isPropriety:false},
-            {id:'PERS002',message:'Bien',isPropriety:true},
-            {id:'PERS002',message:'ok ',isPropriety:false},
-            {id:'PERS002',message:'Au revoir',isPropriety:true}
-        ]
-        setConversationData(conversations)
-    },[])
+    const fetchConversation = async () => {
+            try {
+                const response = await fetch(`${api_domain}message/${personneAuthSelected}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem("tknidclient")}`
+                    },
+                    
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setConversationData(data);
+                } else {
+    
+                }
+            } catch (error) {
+                console.error('Erreur lors de la demande au serveur:', error);
+
+            }        
+      };
+      useEffect(() => {
+        fetchConversation();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, []);
+
+    const [isConnected, setIsConnected] = useState(false);
+    const [messageData,setMessageData] = useState('');
+    const [personneConnectedData, setPersonneConnectedData] = useState([]);
+    const sendMessage = async (idPersonne) => {
+    if (messageData.trim().length > 0) { 
+        try {
+            console.log(isConnected);
+            const response = await fetch(`${api_domain}message`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("tknidclient")}`
+                },
+                body: JSON.stringify({
+                    texto: messageData,
+                    idReceive: idPersonne
+                }),
+            });
+            console.log(response);
+            fetchConversation();
+            setMessageData('');
+        } catch (error) {
+            // Si une erreur se produit, elle sera affichée dans la console
+            console.error('Erreur lors de la demande au serveur :', error);
+            return {
+                status: 500,
+                message: 'Erreur lors de la demande au serveur : ' + error.message
+            };
+        }
+    }
+}
+
+  const checkConnection = async () => {
+    try {
+      const data = await connect_token();
+      if (data.status === 200) {
+        console.log(data);
+        setPersonneConnectedData(data.personne)
+        setIsConnected(true);
+      } else {
+        setIsConnected(false);
+      }
+    } catch (error) {
+      console.error('Une erreur est survenue lors de la récupération de la personne:', error);
+    }
+  };
+
+  useEffect(() => {
+    checkConnection();
+  }, []);
     return(
         <div className="container-conversation">
             <a className="btn-back" onClick={returnToMessageGeneral}><FaBackspace></FaBackspace> Retour</a>
@@ -35,10 +99,10 @@ const Conversation = ({
             <ul>
             {conversationData?.map((conversation) => (
                 <>
-                    {(conversation.isPropriety === true) ? (    
-                    <li className="conversation-text col-12 conversation-text-no-propriety"><p>{conversation.message}</p></li>
+                    {(conversation.idsender === personneAuthSelected) ? (    
+                    <li className="conversation-text col-12 conversation-text-no-propriety"><p>{conversation.texto}</p></li>
                     ) : 
-                    <li className="conversation-text col-12 conversation-text-propriety"><p>{conversation.message}</p></li>                    
+                    <li className="conversation-text col-12 conversation-text-propriety"><p>{conversation.texto}</p></li>                    
                     }
                     <br></br>
                 </>
@@ -46,8 +110,9 @@ const Conversation = ({
             </ul>
             <div className="form-send-message">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control col-10" placeholder="Ecrire un message" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                    <button class="btn btn-outline-secondary col-2" type="button" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
+                 
+                    <input  onChange={(e) => { setMessageData(e.target.value); }} value={messageData} type="text" class="form-control col-10" placeholder="Ecrire un message" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                    <button onClick={() => { sendMessage(personneAuthSelected); }} class="btn btn-outline-secondary col-2" type="button" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
                 </div>
             </div>
         </div>

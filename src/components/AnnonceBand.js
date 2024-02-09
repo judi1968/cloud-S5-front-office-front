@@ -110,7 +110,7 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
                         </div>
                     </div>
                 </>
-            ) : (<></>)}
+            ) : (<></>)} 
 
             </div>
         )}
