@@ -4,21 +4,47 @@ import Header from "../components/Header";
 import './../asset/css/Message.css'
 import { useEffect, useState } from "react";
 import Conversation from "../components/Conversation";
+import { Navigate } from "react-router-dom";
+import { api_domain } from "../services/serviceAPI";
 const Message = () => {
     const [messageData,setMessageData] = useState([]);
     const [messageShow,setMessageShow] = useState(true);
+    const fetchData = async () => {
+        try {
+          const response = await fetch(`${api_domain}clients`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          if (response.ok) {
+              const data = await response.json();
+              setMessageData(data.personnes);
+            }else{
+              Navigate('/error', {
+                state: {
+                  errorStatus: response.status,
+                  errorMessage: response.message,
+                  errorTitle: response.title,
+                },
+              });
+            }
+          
+        } catch (error) {
+          console.error('Erreur lors de la demande au serveur:', error);
+          Navigate('/error', {
+            state: {
+              errorStatus: 404,
+              errorMessage: error,
+              errorTitle: `Erreur lors de la demande au serveur`,
+            },
+          });
+        }
+      };
     useEffect(() => {
-        const messages = [
-            {id:'PERS001',nom:'Rakoto',prenom:'Jean',lastMessage:'Bonjour',lastTime:'01-01-03 18:00'},
-            {id:'PERS002',nom:'Rabe',prenom:'Soa',lastMessage:'On le vend',lastTime:'01-01-03 18:00'},
-            {id:'PERS003',nom:'Randria',prenom:'Mika',lastMessage:'Okay okay',lastTime:'01-01-03 18:00'},
-            {id:'PERS004',nom:'Tiana',prenom:'Rasoa',lastMessage:'Je suis interesse',lastTime:'01-01-03 18:00'},
-            {id:'PERS005',nom:'Rahary',prenom:'Henry',lastMessage:'A plus',lastTime:'01-01-03 18:00'},
-
-        ];
-        setMessageData(messages)
+        fetchData();
     },[]);
-
+    const [personneSelected,setPersonneSeleced] = useState({})
     const handleClickShowMessage = () => {
         if (messageShow===true) {
             setMessageShow(false)
@@ -26,6 +52,7 @@ const Message = () => {
             setMessageShow(true)
         }
     }
+
     return(
         <div>
         <header>
@@ -39,20 +66,18 @@ const Message = () => {
                     <div class="list-group">
                         {messageData?.map((message) => (
                         // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                        <a onClick={handleClickShowMessage} class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                        <a onClick={() => {handleClickShowMessage(); setPersonneSeleced(message.personne)}} class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                             <div class="d-flex gap-2 w-100 justify-content-between">
                             <div>
-                                <h6 class="mb-0">{message.nom} {message.prenom}</h6>
-                                <p class="mb-0 opacity-75">{message.lastMessage}</p>
+                                <h6 class="mb-0">{message.personne.nom} {message.personne.prenom}</h6>
                             </div>
-                            <small class="opacity-50 text-nowrap">{message.lastTime}</small>
                             </div>
                         </a>
                         ))}
                     </div>
                 </div>
                 ):(
-                    <Conversation  returnToMessageGeneral={handleClickShowMessage}></Conversation>
+                    <Conversation personneSelected={personneSelected} returnToMessageGeneral={handleClickShowMessage}></Conversation>
                 )}
             </div>
             <footer>

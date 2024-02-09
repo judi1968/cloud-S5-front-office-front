@@ -4,7 +4,8 @@ import './../assets component/css/Conversation.css'
 import { FaBackspace, FaPaperPlane } from "react-icons/fa";
 
 const Conversation = ({
-    returnToMessageGeneral
+    returnToMessageGeneral,
+    personneSelected
 }) => {
     // style
 
@@ -28,7 +29,7 @@ const Conversation = ({
             <a className="btn-back" onClick={returnToMessageGeneral}><FaBackspace></FaBackspace> Retour</a>
             <center style={{marginTop:'5px'}}>
             <h2>
-                Conversation avec Rakoto
+                Conversation avec {personneSelected.nom} {personneSelected.prenom}
             </h2>   
             </center>
             <ul>
