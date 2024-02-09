@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 import { GrNext } from "react-icons/gr";
@@ -31,6 +32,30 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
     }
   }
   const [isConnected, setIsConnected] = useState(false);
+  const [messageData,setMessageData] = useState('');
+  const sendMessage = async (idPersonne) => {
+    if(messageData.trim.length>0){
+    try {
+    const response = await fetch(`${api_domain}message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("tknidclient")}`
+      },
+      body: JSON.stringify({
+        text: messageData,
+        idReceive:idPersonne
+      }),
+    });
+    console.log(response);
+  } catch (error) {
+      return {
+          status:500,
+          message:'Erreur lors de la demande au serveur:'.error
+    };
+    setMessageData('')
+  }}
+}
   const checkConnection = async () => {
     try {
       const data = await connect_token();
@@ -72,8 +97,8 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
                   <a className='btn-acheter' onClick={() => handleAcheter(annonce.annonce.annonceId)} style={{cursor:'pointer'}}>Acheter</a>
                   <div className="form-send-message" style={{marginTop:'10px'}}>
                       <div class="input-group mb-3">
-                          <input type="text" class="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                          <button class="btn btn-outline-secondary col-2" type="button" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
+                          <input onChange={(e) => setMessageData(e.target.value)} type="text" class="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                          <button onClick={() => sendMessage(annonce.personneClient.id)} class="btn btn-outline-secondary col-2" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
                       </div>
                   </div>
               </>
