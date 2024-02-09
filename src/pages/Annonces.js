@@ -36,7 +36,7 @@ const Annonces = () => {
                     <>
                         {annoncePage === 1 ? (
                         <AnnonceBand 
-                            title="Plus recent" 
+                            title="Tout les annonces" 
                             onChangePage={() => handleToChangeAnnoncePage(0)} 
                             isShowAll={true}
                             limit={8} 
@@ -44,7 +44,7 @@ const Annonces = () => {
                         />
                         ) : (
                         <AnnonceBand 
-                            title="Moin chere" 
+                            title="Tout les annonces" 
                             onChangePage={() => handleToChangeAnnoncePage(0)} 
                             isShowAll={true}
                             limit={8}

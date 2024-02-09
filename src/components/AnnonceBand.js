@@ -1,4 +1,3 @@
-/* eslint-disable no-unreachable */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 import { GrNext } from "react-icons/gr";
@@ -33,33 +32,42 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
   }
   const [isConnected, setIsConnected] = useState(false);
   const [messageData,setMessageData] = useState('');
+  const [personneConnectedData, setPersonneConnectedData] = useState([]);
   const sendMessage = async (idPersonne) => {
-    if(messageData.trim.length>0){
-    try {
-    const response = await fetch(`${api_domain}message`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("tknidclient")}`
-      },
-      body: JSON.stringify({
-        text: messageData,
-        idReceive:idPersonne
-      }),
-    });
-    console.log(response);
-  } catch (error) {
-      return {
-          status:500,
-          message:'Erreur lors de la demande au serveur:'.error
-    };
-    setMessageData('')
-  }}
+    if (messageData.trim().length > 0) { 
+        try {
+            const response = await fetch(`${api_domain}message`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("tknidclient")}`
+                },
+                body: JSON.stringify({
+                    texto: messageData,
+                    idReceive: idPersonne
+                }),
+            });
+            console.log(response);
+
+            setMessageData(''); // Assurez-vous que cette ligne fonctionne correctement pour effacer les données après l'envoi
+
+        } catch (error) {
+            // Si une erreur se produit, elle sera affichée dans la console
+            console.error('Erreur lors de la demande au serveur :', error);
+            return {
+                status: 500,
+                message: 'Erreur lors de la demande au serveur : ' + error.message
+            };
+        }
+    }
 }
+
   const checkConnection = async () => {
     try {
       const data = await connect_token();
       if (data.status === 200) {
+        console.log(data);
+        setPersonneConnectedData(data.personne)
         setIsConnected(true);
       } else {
         setIsConnected(false);
@@ -92,17 +100,18 @@ const AnnonceModal = ({ show, handleClose, annonce }) => {
             <p><strong>Transmission :</strong> {annonce.catalogVoiture.transmissionVoitureNom}</p>
             <p><strong>Freinage :</strong> {annonce.catalogVoiture.freignageVoitureNom}</p>
             <p><strong>Prix :</strong> {formaterPrix(annonce.voiturePrix.prix)}</p>
-            {isConnected? (
-              <>
-                  <a className='btn-acheter' onClick={() => handleAcheter(annonce.annonce.annonceId)} style={{cursor:'pointer'}}>Acheter</a>
-                  <div className="form-send-message" style={{marginTop:'10px'}}>
-                      <div class="input-group mb-3">
-                          <input onChange={(e) => setMessageData(e.target.value)} type="text" class="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                          <button onClick={() => sendMessage(annonce.personneClient.id)} class="btn btn-outline-secondary col-2" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
-                      </div>
-                  </div>
-              </>
+            {isConnected === true && personneConnectedData.id !== annonce.personneClient.id ? (
+                <>
+                    <a className='btn-acheter' onClick={() => handleAcheter(annonce.annonce.annonceId)} style={{cursor:'pointer'}}>Acheter</a>
+                    <div className="form-send-message" style={{marginTop:'10px'}}>
+                        <div className="input-group mb-3">
+                            <input onChange={(e) => { setMessageData(e.target.value); }} type="text" className="form-control col-10" placeholder="Contacter le vendeur ici" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                            <button onClick={() => { sendMessage(annonce.personneClient.id); }} className="btn btn-outline-secondary col-2" id="button-addon2"><FaPaperPlane></FaPaperPlane></button>
+                        </div>
+                    </div>
+                </>
             ) : (<></>)}
+
             </div>
         )}
       </Modal.Body>
